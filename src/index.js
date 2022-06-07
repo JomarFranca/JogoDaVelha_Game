@@ -148,9 +148,9 @@ function Board() {
           <Square value6={value6} jogar={play} pos={6} />
         </div>
         <div className="board-row" style={rowStyle}>
-          <Square value1={value7} jogar={play} pos={7} />
-          <Square value2={value8} jogar={play} pos={8} />
-          <Square value3={value9} jogar={play} pos={9} />
+          <Square value7={value7} jogar={play} pos={7} />
+          <Square value8={value8} jogar={play} pos={8} />
+          <Square value9={value9} jogar={play} pos={9} />
         </div>
       </div>
     </div>
