@@ -64,7 +64,9 @@ function Square({value1, value2, value3, value4, value5, value6, value7, value8,
     case 8: value = value8; break;
     case 9: value = value9; break;
 
+    default:
   }
+
   return <div className="square" style={squareStyle} onClick={() => jogar(pos)} >{value}</div>;
 }
 
@@ -91,12 +93,14 @@ function Board() {
       case 3: if(value3 === '') setValue3(nextPlayer); break;
       case 4: if(value4 === '') setValue4(nextPlayer); break;
       case 5: if(value5 === '') setValue5(nextPlayer); break;
-      case 5: if(value6 === '') setValue6(nextPlayer); break;
+      case 6: if(value6 === '') setValue6(nextPlayer); break;
       case 7: if(value7 === '') setValue7(nextPlayer); break;
       case 8: if(value8 === '') setValue8(nextPlayer); break;
       case 9: if(value9 === '') setValue9(nextPlayer); break;
+
+      default:
     }
-    if(pos === 1 && value1 === '' || (pos === 2 && value2 === '') || (pos === 3 && value3 === '') || (pos === 4 && value4 === '') || (pos === 5 && value5 === '') || (pos === 6 && value6 === '') || (pos === 7 && value7 === '') || (pos === 8 && value8 === '') || (pos === 9 && value9 === '')) {
+    if((pos === 1 && value1 === '') || (pos === 2 && value2 === '') || (pos === 3 && value3 === '') || (pos === 4 && value4 === '') || (pos === 5 && value5 === '') || (pos === 6 && value6 === '') || (pos === 7 && value7 === '') || (pos === 8 && value8 === '') || (pos === 9 && value9 === '')) {
       setNextPlayer(nextPlayer === 'X' ? 'O' : 'X');
     }
     
