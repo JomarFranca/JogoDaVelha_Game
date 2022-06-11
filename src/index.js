@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import ReactDOM from "react-dom";
 
@@ -51,7 +51,13 @@ const buttonStyle = {
   fontSize: "16px",
 };
 
-function Square({value1, value2, value3, value4, value5, value6, value7, value8, value9, jogar, pos}) {
+function Square(props) {
+  // console.log("proppps: ", props) 
+
+  // const value1 = props.value1;
+  // const value2 = props.value2;
+
+  const {value1, value2, value3, value4, value5, value6, value7, value8, value9, jogar, pos} = props;
   let value = '';
   switch (pos) {
     case 1: value = value1; break;
@@ -72,7 +78,10 @@ function Square({value1, value2, value3, value4, value5, value6, value7, value8,
 
 function Board() {
   const [nextPlayer, setNextPlayer] = useState('X');
-  const [value1, setValue1] = useState('');
+  const arr1 = useState('');
+  console.log("array do usestate: ", arr1);
+  const value1 = arr1[0];
+  const setValue1 = arr1[1];
   const [value2, setValue2] = useState('');
   const [value3, setValue3] = useState('');
   const [value4, setValue4] = useState('');
@@ -86,6 +95,9 @@ function Board() {
   const [winner, setWinner] = useState('');
 
   const play = (pos) => {
+    if(winner) {
+      return
+    }
     console.log("vai jogar: ", pos, nextPlayer);
     switch(pos) {
       case 1: if(value1 === '') setValue1(nextPlayer); break;
@@ -103,15 +115,16 @@ function Board() {
     if((pos === 1 && value1 === '') || (pos === 2 && value2 === '') || (pos === 3 && value3 === '') || (pos === 4 && value4 === '') || (pos === 5 && value5 === '') || (pos === 6 && value6 === '') || (pos === 7 && value7 === '') || (pos === 8 && value8 === '') || (pos === 9 && value9 === '')) {
       setNextPlayer(nextPlayer === 'X' ? 'O' : 'X');
     }
-    
-    const vencedor = () => {    
-      if (value1 !== '' && value2 !== '' && value3 !== '') {
-        setWinner (nextPlayer);
-      }
-    }
-
-    vencedor();
+  
   }
+
+  const vencedor = () => {    
+    console.log("vencedor: ", value1, value2, value3);
+    if (value1 !== "" && value1 === value2 && value2 === value3) {
+      setWinner (nextPlayer);
+    }
+  }
+
 
   const limpar = () => {
     console.log('limpou')
@@ -127,6 +140,10 @@ function Board() {
     setValue9('');
   }
 
+  useEffect(() => { 
+    vencedor();
+  },[vencedor])
+
   return (
     <div style={containerStyle} className="gameBoard">
       <div id="statusArea" className="status" style={instructionsStyle}>
@@ -138,7 +155,7 @@ function Board() {
       <button style={buttonStyle} onClick={limpar}>Reset</button>
       <div style={boardStyle}>
         <div className="board-row" style={rowStyle}>
-          <Square value1={value1} jogar={play} pos={1} />
+          <Square value1={value1} jogar={play} pos={1} jomar="Meu nome"/>
           <Square value2={value2} jogar={play} pos={2} />
           <Square value3={value3} jogar={play} pos={3} />
         </div>
