@@ -142,6 +142,12 @@ function Board() {
 							if (value3 !== "" && value3 === value6 && value6 === value9) {
 								setWinner(jogadorAtual);
 						};
+								if (value1 !== "" && value1 === value5 && value5 === value9) {
+									setWinner(jogadorAtual);
+								};
+										if (value3 !== "" && value3 === value5 && value5 === value7) {
+											setWinner(jogadorAtual);
+									};
 	}
 
 
@@ -160,6 +166,7 @@ function Board() {
 		setValue7('');
 		setValue8('');
 		setValue9('');
+		setWinner('');
 	}
 
   useEffect(() => { 
