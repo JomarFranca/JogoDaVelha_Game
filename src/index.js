@@ -79,7 +79,7 @@ function Square(props) {
 function Board() {
   const [nextPlayer, setNextPlayer] = useState('X');
   const arr1 = useState('');
-  console.log("array do usestate: ", arr1);
+  console.log("array do useState: ", arr1);
   const value1 = arr1[0];
   const setValue1 = arr1[1];
   const [value2, setValue2] = useState('');
@@ -93,6 +93,8 @@ function Board() {
 
 
   const [winner, setWinner] = useState('');
+
+	const [jogadorAtual, setJogadorAtual] = useState('');
 
   const play = (pos) => {
     if(winner) {
@@ -113,32 +115,52 @@ function Board() {
       default:
     }
     if((pos === 1 && value1 === '') || (pos === 2 && value2 === '') || (pos === 3 && value3 === '') || (pos === 4 && value4 === '') || (pos === 5 && value5 === '') || (pos === 6 && value6 === '') || (pos === 7 && value7 === '') || (pos === 8 && value8 === '') || (pos === 9 && value9 === '')) {
+			setJogadorAtual(nextPlayer);
       setNextPlayer(nextPlayer === 'X' ? 'O' : 'X');
+			console.log('jogar', jogadorAtual);
     }
   
   }
 
-  const vencedor = () => {    
-    console.log("vencedor: ", value1, value2, value3);
-    if (value1 !== "" && value1 === value2 && value2 === value3) {
-      setWinner (nextPlayer);
-    }
-  }
+	const newLocal = () => {
+		console.log("vencedor: ", value1, value2, value3);
+		if (value1 !== "" && value1 === value2 && value2 === value3) {
+			setWinner(jogadorAtual);
+	};
+			if (value4 !== "" && value4 === value5 && value5 === value6) {
+			setWinner(jogadorAtual);
+		};
+				if (value7 !== "" && value7 === value8 && value8 === value9) {
+					setWinner(jogadorAtual);
+			};
+					if (value1 !== "" && value1 === value4 && value4 === value7) {
+						setWinner(jogadorAtual);
+				};
+						if (value2 !== "" && value2 === value5 && value5 === value8) {
+						setWinner(jogadorAtual);
+					};
+							if (value3 !== "" && value3 === value6 && value6 === value9) {
+								setWinner(jogadorAtual);
+						};
+	}
 
 
-  const limpar = () => {
-    console.log('limpou')
-    setNextPlayer("X");
-    setValue1('');
-    setValue2('');
-    setValue3('');
-    setValue4('');
-    setValue5('');
-    setValue6('');    
-    setValue7('');
-    setValue8('');
-    setValue9('');
-  }
+  const vencedor = newLocal
+
+
+  function limpar() {
+		console.log('limpou');
+		setNextPlayer("X");
+		setValue1('');
+		setValue2('');
+		setValue3('');
+		setValue4('');
+		setValue5('');
+		setValue6('');
+		setValue7('');
+		setValue8('');
+		setValue9('');
+	}
 
   useEffect(() => { 
     vencedor();
